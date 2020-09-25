@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Websockets</title>
+</head>
+<body>
+  <h1>Exemple Websockets</h1>   
+</body>
+<script>
+  var wsUrl = 'ws://localhost:9100';
+  var monWebSocket = {};
+  monWebSocket.socket = null;
+  monWebSocket.connect = function(host) {
+    monWebSocket.socket = new WebSocket(host);
+    monWebSocket.socket.onmessage = function (message) {
+      console.log("Message reçu : " + message.data);
+    }
+  }
+
+  monWebSocket.connect(wsUrl);
+
+  setTimeout(() => {
+    var mess = "je suis le client";
+    monWebSocket.socket.send(mess);
+  }, 2000);
+</script>
+</html>
